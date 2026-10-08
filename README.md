@@ -25,16 +25,16 @@ pnpm dev                    # shell → http://localhost:3000, loans zone → :3
 Always open **http://localhost:3000**. The shell proxies `/loans/*` to the loans zone, exactly as
 the ingress does in production.
 
-| Command                   | What it does                                                   |
-| ------------------------- | -------------------------------------------------------------- |
-| `pnpm dev`                | Run both zones with Turbopack                                  |
-| `pnpm build`              | Production build of every zone (standalone output)             |
-| `pnpm lint` / `typecheck` | ESLint (incl. jsx-a11y, react-hooks, Next rules) / `tsc`       |
-| `pnpm test`               | Vitest + Testing Library unit/integration tests                |
-| `pnpm test:e2e`           | Playwright E2E + axe accessibility scans (desktop & mobile)    |
-| `pnpm format`             | Prettier (with Tailwind class sorting)                         |
-| `docker compose up`       | Both zones as hardened containers (needs `SESSION_SECRET` set) |
-| `kubectl apply -k k8s/`   | Deploy to Kubernetes                                           |
+| Command                   | What it does                                                                                  |
+| ------------------------- | --------------------------------------------------------------------------------------------- |
+| `pnpm dev`                | Run both zones with Turbopack                                                                 |
+| `pnpm build`              | Production build of every zone (standalone output)                                            |
+| `pnpm lint` / `typecheck` | ESLint (incl. jsx-a11y, react-hooks, Next rules) / `tsc`                                      |
+| `pnpm test`               | Vitest + Testing Library unit/integration tests                                               |
+| `pnpm test:e2e`           | Playwright E2E + axe accessibility scans (desktop & mobile)                                   |
+| `pnpm format`             | Prettier (with Tailwind class sorting)                                                        |
+| `docker compose up`       | Both zones as hardened containers (needs `SESSION_SECRET`; set `SHELL_PORT` if 3000 is taken) |
+| `kubectl apply -k k8s/`   | Deploy to Kubernetes                                                                          |
 
 ---
 

@@ -6,7 +6,8 @@ services:
       context: .
       args: { APP: shell }
     image: nexbank/shell:local
-    ports: ["3000:3000"]
+    # Host port is configurable in case 3000 is taken: SHELL_PORT=3080 docker compose up
+    ports: ["${SHELL_PORT:-3000}:3000"]
     environment:
       SESSION_SECRET: ${SESSION_SECRET:?set SESSION_SECRET (>= 32 chars)}
       LOANS_ZONE_URL: http://loans:3000
