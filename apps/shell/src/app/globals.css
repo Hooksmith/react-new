@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@import "@nexbank/ui/styles.css";
+
+/* Scan shared component source for class names. */
+@source "../../../../packages/ui/src";

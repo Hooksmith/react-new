@@ -1,0 +1,34 @@
+# Production-like local stack: both zones as containers, shell exposed on :3000.
+#   SESSION_SECRET=$(openssl rand -base64 48) docker compose up --build
+services:
+  shell:
+    build:
+      context: .
+      args: { APP: shell }
+    image: nexbank/shell:local
+    ports: ["3000:3000"]
+    environment:
+      SESSION_SECRET: ${SESSION_SECRET:?set SESSION_SECRET (>= 32 chars)}
+      LOANS_ZONE_URL: http://loans:3000
+    depends_on:
+      loans: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 10s
+      retries: 5
+    read_only: true
+    tmpfs: ["/tmp", "/app/apps/shell/.next/cache"]
+
+  loans:
+    build:
+      context: .
+      args: { APP: loans }
+    image: nexbank/loans:local
+    environment:
+      SESSION_SECRET: ${SESSION_SECRET:?set SESSION_SECRET (>= 32 chars)}
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/loans/api/health"]
+      interval: 10s
+      retries: 5
+    read_only: true
+    tmpfs: ["/tmp", "/app/apps/loans/.next/cache"]

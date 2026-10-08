@@ -1,0 +1,24 @@
+{
+  "name": "@nexbank/config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./tsconfig.base.json": "./tsconfig.base.json",
+    "./tsconfig.nextjs.json": "./tsconfig.nextjs.json",
+    "./eslint": "./eslint.config.mjs",
+    "./eslint-next": "./eslint.next.config.mjs",
+    "./vitest": "./vitest.shared.mjs"
+  },
+  "peerDependencies": {
+    "eslint": "^9.39.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "eslint-config-next": "16.4.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.4.0",
+    "typescript-eslint": "^8.71.1"
+  },
+  "description": "Shared lint/TS/test configuration. Tooling only, never shipped in a production bundle."
+}

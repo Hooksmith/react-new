@@ -1,0 +1,26 @@
+# kubectl apply -k k8s/
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: nexbank
+labels:
+  - pairs: { app.kubernetes.io/part-of: nexbank-lending }
+    includeSelectors: false
+
+resources:
+  - namespace.yaml
+  - shell.yaml
+  - loans.yaml
+  - ingress.yaml
+  - network-policy.yaml
+
+# CI pins images by immutable digest/tag: `kustomize edit set image nexbank/shell=ghcr.io/...@sha256:...`
+images:
+  - name: nexbank/shell
+    newName: ghcr.io/your-org/nexbank-shell
+    newTag: latest
+  - name: nexbank/loans
+    newName: ghcr.io/your-org/nexbank-loans
+    newTag: latest
+
+# SESSION_SECRET must never be committed. Provide it via External Secrets / Sealed Secrets, or:
+#   kubectl -n nexbank create secret generic nexbank-session --from-literal=SESSION_SECRET="$(openssl rand -base64 48)"

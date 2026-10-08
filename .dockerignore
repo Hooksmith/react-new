@@ -1,0 +1,16 @@
+**/node_modules
+**/.next
+**/.turbo
+**/coverage
+**/*.tsbuildinfo
+.git
+.github
+k8s
+e2e/test-results
+e2e/playwright-report
+**/.env
+**/.env.*
+!**/.env.example
+**/.DS_Store
+Dockerfile
+docker-compose.yml
