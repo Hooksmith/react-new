@@ -39,7 +39,8 @@ export function LoginForm() {
   });
 
   return (
-    <form onSubmit={onSubmit} noValidate className="space-y-4">
+    // method="post": if JS hasn't hydrated, a native submit must never put the password in the URL.
+    <form onSubmit={onSubmit} method="post" noValidate className="space-y-4">
       {formError && (
         <p role="alert" className="bg-danger/10 text-danger rounded-lg px-3 py-2 text-sm">
           {formError}
